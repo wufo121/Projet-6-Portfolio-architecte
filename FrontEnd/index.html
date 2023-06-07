@@ -7,12 +7,56 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script src="portfolio.js"></script>
+	<script src="portfolio.js" defer></script>
 </head>
 <body>
-<header>
+	<div  class="connected">
+		<div class="connected-content">
+			<i class="fa-solid fa-pen-to-square"></i>
+			<a href="#modal1" class="js-modal editMod">Mode édition</a>
+			<button id="publish">Publier les changement</button>
+			<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="tiltle-modal1" style="display: none;">
+				<div class="modal-content js-modal-stop">
+					<button class="js-modal-close close">x</button>
+					<h3 id="tiltle-modal1">Galerie Photo</h3>
+					<div id="gallery-modal"></div>
+					<a class="linkAddPictures js-modal " href="#modal2" >Ajouter une Photo</a>
+					<p class="deleteAll">Supprimer la galerie</p>
+				</div>
+			</aside>
+			<aside id="modal2" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="tiltle-modal2" style="display: none;">
+				<div class="modal-content js-modal-stop">
+					<a class="js-modal returnBack" href="#modal1">
+						<i class="fa-solid fa-arrow-left"></i>
+					</a>
+					<button class="js-modal-close close">x</button>
+					<h3 id="tiltle-modal2">Ajout photo</h3>
+					<div class="addPictures">
+						<i class="fa-regular fa-image"></i>
+						<button id="buttonAddPicures" class="buttonAddPicures">+ Ajouter photo</button>
+						<p>jpg, png : 4mo max</p>
+					</div>
+					<form>
+						<label for="titre">Titre</label>
+						<input type="text" id="titre" name="titre">
+						<label for="categorie">Catégorie</label>
+						<select id="categorie" name="categorie">
+							<option value=""></option>
+							<option value="1">Catégorie 1</option>
+							<option value="2">Catégorie 2</option>
+							<option value="3">Catégorie 3</option>
+						</select>
+						<input type="submit" value="Valider">
+					</form>
+				</div>
+			</aside>
+		</div>
+	</div>
+	<header>
+	
 	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 	<nav>
 		<ul>

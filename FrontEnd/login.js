@@ -18,6 +18,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
     })
     .then(function(response) {
       if (response.ok) {
+        localStorage.setItem('isLoggedIn', 'true');
         window.location.href = "index.html";
       } else {
         document.getElementById("login-form").classList.add("error")
@@ -32,5 +33,11 @@ document.getElementById("login-form").addEventListener("submit", function(event)
       console.log("Une erreur s'est produite lors de la connexion :", error);
     });
   });
+
+  function isLoggedIn() {
+    return localStorage.getItem('isLoggedIn') === 'true';
+  }
   
-  
+
+
+
