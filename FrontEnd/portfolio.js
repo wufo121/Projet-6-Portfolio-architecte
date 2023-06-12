@@ -21,7 +21,11 @@ document.addEventListener("DOMContentLoaded", function() {
   
     for (let i = 0; i < pictures.length; i++) {
       const article = pictures[i];
+      const imgExists = Array.from(gallery.getElementsByTagName('img')).some(img => img.src === article.imageUrl);
       const figure = document.createElement('figure');
+      if (imgExists) {
+        continue; // Ignore l'itération si l'image existe déjà dans la galerie
+      }
       const img = document.createElement('img');
       img.src = article.imageUrl;
       img.alt = article.title;
@@ -31,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
       figure.appendChild(img);
       figure.appendChild(figcaption);
       gallery.appendChild(figure);
+      console.log(article)
     }
   }
   
@@ -129,28 +134,162 @@ document.addEventListener("DOMContentLoaded", function() {
   })
 
   function generatePictureModal(pictures) {
-    const gallery = document.getElementById('gallery-modal');
+    const galleryModal = document.getElementById('gallery-modal');
   
     for (let i = 0; i < pictures.length; i++) {
       const article = pictures[i];
+      const imgExists = Array.from(galleryModal.getElementsByTagName('img')).some(img => img.src === article.imageUrl);
+  
+      if (imgExists) {
+        continue; 
+      }
+  
       const figure = document.createElement('figure');
       const img = document.createElement('img');
       const trash = document.createElement('i');
-      trash.classList.add("fa-solid","fa-trash-can")
+      trash.classList.add("fa-solid","fa-trash-can");
       const editer = document.createElement('p');
-      editer.textContent = ('éditer');
-
+      editer.textContent = 'éditer';
+  
       img.src = article.imageUrl;
       img.alt = article.title;
       figure.appendChild(img);
-      gallery.appendChild(figure);
-      figure.appendChild(trash)
+      figure.appendChild(trash);
       figure.appendChild(editer);
+      galleryModal.appendChild(figure);
+    }
+  }
+  
+
+  document.getElementById('fileStatus').addEventListener('click', function() {
+    document.getElementById('buttonAddPictures').click();
+  });
+
+
+  const buttonAddPictures = document.getElementById('buttonAddPictures');
+  const previewImage = document.getElementById('previewImage');
+
+  buttonAddPictures.addEventListener('change', function() {
+    const file = buttonAddPictures.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        previewImage.src = e.target.result;
+        previewImage.style.display = 'block';
+        document.getElementById('fileStatus').style.display = 'none';
+      }
+      reader.readAsDataURL(file);
+    }
+  });
+
+
+  const titleInput = document.getElementById('title');
+  const categorySelect = document.getElementById('category');
+  const fileInput = document.getElementById('buttonAddPictures');
+  const validateButton = document.getElementById('validatePush')
+
+
+  function checkFields() {
+    const titleValue = titleInput.value.trim();
+    const categoryValue = categorySelect.value;
+    const fileValue = fileInput.value;
+
+    if (titleValue !== '' && categoryValue !== '' && fileValue !== '') {
+      validateButton.style.backgroundColor = '#1D6154';
+    } else {
+      validateButton.style.backgroundColor = '';
     }
   }
 
- 
+  titleInput.addEventListener('input', checkFields);
+  categorySelect.addEventListener('change', checkFields);
+  fileInput.addEventListener('change', checkFields);
+
+
+  function sendData() {
+  const titleValue = document.getElementById('title').value.trim();
+  const categoryValue = document.getElementById('category').value;
+  const fileValue = fileInput.files[0];
+
+  if (titleValue === '' || categoryValue === '' || fileValue === undefined) {
+    console.error('Veuillez remplir tous les champs.');
+    return;
+  }
+
+  const token = localStorage.getItem('token');
+
+  const formData = new FormData();
+  formData.append('title', titleValue);
+  formData.append('categoryId', categoryValue);
+
+  // Utilisez fetch pour télécharger le fichier
+  fetch('http://localhost:5678/api/upload', {
+    method: 'POST',
+    body: fileValue,
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  })
+    .then(response => response.json())
+    .then(data => {
+      const imageUrl = data.imageUrl;
+
+      formData.append('imageUrl', imageUrl);
+
+      const options = {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      };
+
+      fetch('http://localhost:5678/api/works', options)
+        .then(response => {
+          if (response.ok) {
+            console.log('Données envoyées avec succès !');
+            document.getElementById('title').value = '';
+            document.getElementById('category').value = '';
+            document.getElementById('buttonAddPictures').value = '';
+
+            refreshGallery();
+            refreshModalGallery();
+          } else {
+            console.error('Échec de l\'envoi des données.');
+          }
+        })
+        .catch(error => {
+          console.error('Erreur lors de l\'envoi des données:', error);
+        });
+    })
+    .catch(error => {
+      console.error('Erreur lors de l\'envoi du fichier:', error);
+    });
+}
+
+  
+    
+  validateButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    sendData();
+  });
+  
+
+  function refreshGallery() {
+    const gallery = document.getElementById('gallery');
+    gallery.innerHTML = ''; 
+      
+    fetchSwagger(); 
+  }
+  function refreshModalGallery() {
+    const galleryModal = document.getElementById('gallery-modal');
+    galleryModal.innerHTML = ''; 
+    
+    fetchSwagger(); // 
+  }  
 
   
   fetchSwagger();
-});
+
+ 
+  });
