@@ -221,49 +221,32 @@ document.addEventListener("DOMContentLoaded", function() {
   const formData = new FormData();
   formData.append('title', titleValue);
   formData.append('categoryId', categoryValue);
+  formData.append('file', fileValue);
 
-  // Utilisez fetch pour télécharger le fichier
-  fetch('http://localhost:5678/api/upload', {
+  const options = {
     method: 'POST',
-    body: fileValue,
+    body: formData,
     headers: {
       'Authorization': 'Bearer ' + token
     }
-  })
-    .then(response => response.json())
-    .then(data => {
-      const imageUrl = data.imageUrl;
+  };
 
-      formData.append('imageUrl', imageUrl);
+  fetch('http://localhost:5678/api/works', options)
+    .then(response => {
+      if (response.ok) {
+        console.log('Données envoyées avec succès !');
+        document.getElementById('title').value = '';
+        document.getElementById('category').value = '';
+        document.getElementById('buttonAddPictures').value = '';
 
-      const options = {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
-      };
-
-      fetch('http://localhost:5678/api/works', options)
-        .then(response => {
-          if (response.ok) {
-            console.log('Données envoyées avec succès !');
-            document.getElementById('title').value = '';
-            document.getElementById('category').value = '';
-            document.getElementById('buttonAddPictures').value = '';
-
-            refreshGallery();
-            refreshModalGallery();
-          } else {
-            console.error('Échec de l\'envoi des données.');
-          }
-        })
-        .catch(error => {
-          console.error('Erreur lors de l\'envoi des données:', error);
-        });
+        refreshGallery();
+        refreshModalGallery();
+      } else {
+        console.error('Échec de l\'envoi des données.');
+      }
     })
     .catch(error => {
-      console.error('Erreur lors de l\'envoi du fichier:', error);
+      console.error('Erreur lors de l\'envoi des données:', error);
     });
 }
 
