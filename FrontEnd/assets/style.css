@@ -141,7 +141,7 @@ body {
 }
 
 
-/**modal-1**/
+/**modal Menu**/
 
 
 
@@ -200,7 +200,7 @@ body {
 /**modal-2**/
 
 
-#modal2{
+#modalAddPictures{
 	position: fixed;
 	z-index: 2;
 }

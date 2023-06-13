@@ -10,30 +10,30 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script src="portfolio.js" defer></script>
+	<script src="/FrontEnd/Javascipt/portfolio.js" defer></script>
 </head>
 <body>
 	<div  class="connected">
 		<div class="connected-content">
 			<i class="fa-solid fa-pen-to-square"></i>
-			<a href="#modal1" class="js-modal editMod">Mode édition</a>
+			<a href="#modalMenu" class="js-modal editMod">Mode édition</a>
 			<button id="publish">Publier les changement</button>
-			<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="tiltle-modal1" style="display: none;">
+			<aside id="modalMenu" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="tiltle-modalMenu" style="display: none;">
 				<div class="modal-content js-modal-stop">
 					<button class="js-modal-close close">x</button>
-					<h3 id="tiltle-modal1">Galerie Photo</h3>
+					<h3 id="tiltle-modalMenu">Galerie Photo</h3>
 					<div id="gallery-modal"></div>
-					<a class="linkAddPictures js-modal " href="#modal2" >Ajouter une Photo</a>
+					<a class="linkAddPictures js-modal " href="#modalAddPictures" >Ajouter une Photo</a>
 					<p class="deleteAll">Supprimer la galerie</p>
 				</div>
 			</aside>
-			<aside id="modal2" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="tiltle-modal2" style="display: none;">
+			<aside id="modalAddPictures" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="tiltle-modalAddPictures" style="display: none;">
 				<div class="modal-content js-modal-stop">
-					<a class="js-modal returnBack" href="#modal1">
+					<a class="js-modal returnBack" href="#modalMenu">
 						<i class="fa-solid fa-arrow-left"></i>
 					</a>
 					<button class="js-modal-close close">x</button>
-					<h3 id="tiltle-modal2">Ajout photo</h3>
+					<h3 id="tiltle-modalAddPictures">Ajout photo</h3>
 					<div class="addPictures">
 						<label for="labelAddPictures">
 							<img id="previewImage" src="#" alt="Aperçu de l'image" style="display: none;">
@@ -66,8 +66,8 @@
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li><a href="login.html">login</a></li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			<li><a href="/FrontEnd/login/login.html">login</a></li>
+			<li><img src="/FrontEnd/assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
 </header>
