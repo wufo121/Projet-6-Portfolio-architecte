@@ -17,13 +17,14 @@ document.getElementById("login-form").addEventListener("submit", function(event)
     },
     body: JSON.stringify(data)
   })
-    .then(function(response) {
-      if (response.ok) {
-        return response.json(); 
-      } else {
-        throw new Error('Identifiants invalides. Veuillez réessayer.');
-      }
-    })
+  .then(function(response) {
+    if (response.ok) {
+      return response.json(); 
+    } else {
+      document.getElementById("error-message").style.display = "block";
+      throw new Error('Identifiants invalides. Veuillez réessayer.');
+    }
+  })
     /*Permet de stocker le Token ainsi que de savoir si l'utilisateur est connecté*/
     
     .then(function(data) {
@@ -39,10 +40,10 @@ document.getElementById("login-form").addEventListener("submit", function(event)
 
       setTimeout(function() {
         document.getElementById("login-form").classList.remove("error");
-      }, 500);
+        document.getElementById("error-message").style.display = "none";
+      }, 2000);
     });
-});
 
 function isLoggedIn() {
   return localStorage.getItem('isLoggedIn') === 'true';
-}
+}});

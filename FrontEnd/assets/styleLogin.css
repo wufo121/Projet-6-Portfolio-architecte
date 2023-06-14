@@ -94,7 +94,8 @@ h2{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154
+	color: #1D6154;
+	padding-bottom: 20px;
 }
 nav ul {
 	display: flex;
@@ -147,17 +148,20 @@ form input[type=email] {
     
 }
 
-  
+.login {
+	position: relative;
+}
+
 #login-form.error input[type="email"],
 #login-form.error input[type="password"] {
   animation: translate 0.5s ;
-  background-color: red  ;
+  background-color: rgba(219, 13, 13, 0.507)  ;
 }
-  
 
-  
-
-
+#error-message{
+	position: absolute;
+	top:40px;
+}
 
 form input[type=submit]{
     border-radius: 60px;
