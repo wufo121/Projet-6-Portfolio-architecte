@@ -61,8 +61,6 @@ body {
 .connected{
 	display: none;
 	position: relative;
-	opacity: 1;
-	z-index: 1;
 }
 
 .connected-content{
@@ -103,20 +101,45 @@ body {
 	background-color: black;
 	font-weight: 100;
 }
+
+.edit-introduction {
+	position: absolute;
+	z-index: 0;
+	gap:10px;
+	top:10px;
+	left: 60px;
+	display: flex;
+	color: black;
+	flex-direction: row;
+	font-weight: 400;
+	font-family: 'Work Sans';
+}
+
+.edit-portfolio {
+	position: relative;
+	z-index: -1;
+	gap:10px;
+	left: 60%;
+	top:25px;
+	display: flex;
+	color: black;
+	flex-direction: row;
+	font-weight: 400;
+	font-family: 'Work Sans';
+}
 /**modal-general**/
 
 .modal {
 	position: fixed;
+	z-index: 2;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	top: 0;
+	top:0;
 	left: 0;
 	width: 100%;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.4);
-	
-	
 }
 .modal-content{
 	position: relative;
@@ -127,8 +150,7 @@ body {
 	background-color: white;
 	overflow-y: auto;
 	width: 30%;
-	height: 70%;
-	
+	height: 80%;
 	border-radius: 10px;
 	padding: 20px 4%;
 }
@@ -136,15 +158,13 @@ body {
 	font-weight: 400;
 	font-family: 'Work Sans';
 	font-size: 50px;
-	padding-top: 60px;
-	padding-bottom: 40px;
+	padding-top: 20px;
+	padding-bottom: 60px;
+
 }
 
 
 /**modal Menu**/
-
-
-
 .modal-content .linkAddPictures {
 	border-radius: 60px;
 	background-color: #1D6154;
@@ -152,8 +172,8 @@ body {
 	font-family:'Syne' ;
 	padding: 15px 20%;
 	font-size: medium;
-	margin-top:1em;
-	margin-bottom: 10px;
+
+	
 	text-decoration: none;
 }
 
@@ -182,20 +202,38 @@ body {
 	position: relative;
 	bottom: 15%;
 }
-.fa-trash-can {
+.iconsDiv{
 	display: flex;
-	justify-content: center;
-	justify-items: center;
+	justify-content: flex-end;
 	position: relative;
 	z-index: 2;
-	right: -57%;
+	right: 5%;
 	top:-70%;
-	background-color: black;
+	gap:5px;
 	color: white;
 	scale: 0.9;
-	width: 40%;
-	padding: 5%;
 	border-radius: 2px;
+	
+}
+
+.fa-arrows-up-down-left-right{
+	background-color: black;
+	padding: 5%;
+	width: 20%;
+	display: flex;
+	justify-content: center;
+	right: 5%;
+	
+}
+.fa-trash-can{
+	position: relative;
+	background-color: black;
+	padding: 5%;
+	width: 20%;
+	display: flex;
+	justify-content: center;
+	
+	
 }
 /**modal-2**/
 
@@ -204,28 +242,33 @@ body {
 	position: fixed;
 	z-index: 2;
 }
-
-.addPictures{
-	
+#modalAddPictures .modal-content{
+	width: 30%;
+	overflow: hidden;
+}
+.addPictures {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
 	justify-content: center;
-	background-color:#e8f1f6; 
+	background-color: #e8f1f6;
 	height: 100%;
 	width: 100%;
 	margin-bottom: 30px;
-}
+	position: relative; 
+  }
 
 .addPictures label {
-	position: relative;
+	margin-top: 50px;
 	display: flex;
 	flex-direction: column;
 	color: #306685;
 	font-family: 'Work Sans';
 	font-weight: 500;
 	align-items: center;
+	flex: 1; /* Add this line */
 }
+
 .addPictures  #fileStatus{
 	font-family: 'Work Sans';
 	font-weight: 500;
@@ -237,10 +280,17 @@ body {
 	padding: 10px 33px;
 	border-radius: 50px;
 }
+
 .addPictures p {
-	color: #444444;
-	background-color:#e8f1f6;
+	position: absolute;
+	bottom: 0;
+	left: 36%;
+	width: 100%;
+	margin-bottom: 10px;
+	z-index: 1; 
 }
+  
+
 .modal-content .fa-image {
 	display: flex;
 	color: #B9C5CC;
@@ -300,14 +350,13 @@ body {
 
 #previewImage{
 	position: absolute;
+	top: 0;
 	max-width: 100%;
 	max-height: 100%;
-	z-index: 3;
-	scale: 2.36;
-	object-fit: fill;
-	bottom: 5px;
+	object-fit: cover; 
+	z-index: 2;
+  }
 	
-}
 
 .modal-content .close{
 	position: absolute;

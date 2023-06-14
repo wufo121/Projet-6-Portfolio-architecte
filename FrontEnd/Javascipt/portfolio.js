@@ -80,13 +80,16 @@ document.addEventListener("DOMContentLoaded", function() {
   function checkLoggedIn() {
     return localStorage.getItem('isLoggedIn') === 'true';
   }
-  /* Fonction pour faire apparaitre les éléments si connecté*/
-
+  
+  /* Fonction pour faire apparaître les éléments si connecté */
   function showConnectedElements() {
-    const connectedDiv = document.querySelector('.connected');
-    connectedDiv.style.display = 'block';
-    console.log(connectedDiv)
+    const connectedDivs = document.querySelectorAll('.connected');
+    connectedDivs.forEach((div) => {
+      div.style.display = 'block';
+    });
+    console.log(connectedDivs);
   }
+  
   if (checkLoggedIn()) {
     showConnectedElements();
   }
@@ -149,27 +152,41 @@ document.addEventListener("DOMContentLoaded", function() {
       const imgExists = Array.from(galleryModal.getElementsByTagName('img')).some(img => img.src === article.imageUrl);
   
       if (imgExists) {
-        continue; 
+        continue;
       }
   
       const figure = document.createElement('figure');
       const img = document.createElement('img');
       const trash = document.createElement('i');
-      trash.classList.add("fa-solid","fa-trash-can");
-      trash.addEventListener('click', function() {
+      trash.classList.add("fa-solid", "fa-trash-can");
+      trash.addEventListener('click', function () {
         deleteElement(article.id);
       });
       const editer = document.createElement('p');
       editer.textContent = 'éditer';
+      const iconsDiv = document.createElement('div');
+      iconsDiv.classList.add('iconsDiv')
   
       img.src = article.imageUrl;
       img.alt = article.title;
       figure.appendChild(img);
-      figure.appendChild(trash);
+  
+      if (i === 0) {
+        
+  
+        const arrowsIcon = document.createElement('i');
+        arrowsIcon.classList.add("fa-solid", "fa-arrows-up-down-left-right");
+        iconsDiv.appendChild(arrowsIcon);
+        
+      }
+      figure.appendChild(iconsDiv);
+      iconsDiv.appendChild(trash);
       figure.appendChild(editer);
       galleryModal.appendChild(figure);
     }
   }
+  
+  
   
 /* gerer le bouton pour ajouter une photo*/
   document.getElementById('fileStatus').addEventListener('click', function() {
