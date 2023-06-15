@@ -32,7 +32,11 @@ document.getElementById("login-form").addEventListener("submit", function(event)
 
       localStorage.setItem('token', token);
       localStorage.setItem('isLoggedIn', 'true');
-      window.location.href = "../../index.html";
+
+      /*renvoie à mon login*/
+      const baseURL = window.location.origin;
+      const indexPath = baseURL + "/index.html";
+      window.location.assign(indexPath);
     })
     .catch(function(error) {
       document.getElementById("login-form").classList.add("error");
