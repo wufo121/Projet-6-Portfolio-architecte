@@ -34,9 +34,9 @@ document.getElementById("login-form").addEventListener("submit", function(event)
       localStorage.setItem('isLoggedIn', 'true');
 
       /*renvoie à mon login*/
-      const baseURL = window.location.origin;
-      const indexPath = baseURL + "/index.html";
-      window.location.assign(indexPath);
+      const indexPath = "/index.html";
+      window.location.href = indexPath;
+      
     })
     .catch(function(error) {
       document.getElementById("login-form").classList.add("error");
@@ -47,7 +47,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
         document.getElementById("error-message").style.display = "none";
       }, 2000);
     });
-
+    
 function isLoggedIn() {
   return localStorage.getItem('isLoggedIn') === 'true';
 }});
