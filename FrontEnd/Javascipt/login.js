@@ -34,8 +34,9 @@ document.getElementById("login-form").addEventListener("submit", function(event)
       localStorage.setItem('isLoggedIn', 'true');
 
       /*renvoie à mon login*/
-      const indexPath = "/index.html";
-      window.location.href = indexPath;
+      const baseURL = window.location.origin;
+      const indexPath = baseURL + "/index.html";
+      window.location.assign(indexPath);
       
     })
     .catch(function(error) {
