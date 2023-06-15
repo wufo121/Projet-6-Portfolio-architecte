@@ -34,9 +34,17 @@ document.getElementById("login-form").addEventListener("submit", function(event)
       localStorage.setItem('isLoggedIn', 'true');
 
       /*renvoie à mon login*/
-      const baseURL = window.location.origin;
-      const indexPath = baseURL + "/index.html";
-      window.location.assign(indexPath);
+      let indexPath = ""; 
+
+      if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+        indexPath = "../../index.html";
+
+      } else {
+        const username = "wufo121";
+        const repository = "Projet-6-Portfolio-architecte";
+        indexPath = `https://${username}.github.io/${repository}/index.html`;
+      }
+      window.location.href = indexPath;
       
     })
     .catch(function(error) {
