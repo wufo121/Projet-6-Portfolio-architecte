@@ -32,7 +32,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
 
       localStorage.setItem('token', token);
       localStorage.setItem('isLoggedIn', 'true');
-      window.location.href = "../index.html";
+      window.location.href = "/index.html";
     })
     .catch(function(error) {
       document.getElementById("login-form").classList.add("error");
