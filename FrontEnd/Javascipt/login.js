@@ -33,7 +33,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
       localStorage.setItem('token', token);
       localStorage.setItem('isLoggedIn', 'true');
 
-      /*renvoie à mon login*/
+      /*renvoie à mon index*/
       let indexPath = ""; 
 
       if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
@@ -55,8 +55,5 @@ document.getElementById("login-form").addEventListener("submit", function(event)
         document.getElementById("login-form").classList.remove("error");
         document.getElementById("error-message").style.display = "none";
       }, 2000);
-    });
-    
-function isLoggedIn() {
-  return localStorage.getItem('isLoggedIn') === 'true';
-}});
+  });  
+});
